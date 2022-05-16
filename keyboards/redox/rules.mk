@@ -18,7 +18,9 @@ AUDIO_ENABLE = no           # Audio output
 RGBLIGHT_ENABLE = yes       # Enable WS2812 RGB underlight.
 
 SPLIT_KEYBOARD = yes
+DYNAMIC_MACRO_ENABLE = yes  # Enable Dynamic macros
 
+TAP_DANCE_ENABLE = yes
 DEFAULT_FOLDER = redox/rev1
 
 # Disable unsupported hardware
