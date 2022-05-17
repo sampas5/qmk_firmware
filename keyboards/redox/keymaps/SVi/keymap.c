@@ -13,7 +13,7 @@
 #define _SYMB2 2
 #define _NAV 3
 #define _NAV2 4
-#define _ADJUST 5
+#define _ADJUST 5 
 
 #define KC_PLPS KC_MEDIA_PLAY_PAUSE
 #define KC_NEXT TD(NEXT_PREV)
@@ -31,7 +31,11 @@ enum custom_keycodes {
   CTRL_V,
   DEGREE_S,
   MICRO_S,
-  ALT_TAB
+  ALT_TAB,
+  KC_UP_RIGHT,
+  KC_UP_LEFT,
+  KC_DOWN_RIGHT,
+  KC_DOWN_LEFT,
 };
 
 // Tap Dance declarations
@@ -49,7 +53,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // Shortcut to make keymap more readable
 #define SYM_L   MO(_SYMB2)
 #define NAV_L   TT(_NAV)
-#define NAV2_L   TT(_NAV2)
 
 #define KC_ALAS LALT_T(FI_LABK)
 #define KC_CTPL RCTL_T(FI_MINS)
@@ -60,10 +63,15 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KC_NA_I LT(_NAV, KC_I)
 #define KC_SY_H LT(_SYMB, KC_H)
 
+#define KC_N2_A LT(_NAV2, KC_A)
+#define KC_N2_S LT(_NAV2, KC_S)
+
 #define KC_SYEN LT(_SYMB, KC_END)
 #define KC_SYHO LT(_SYMB, KC_HOME)
 
-#define KC_NADE LT(_NAV, KC_DEL)
+#define KC_NADE LT(_NAV2, KC_DEL)
+
+#define KC_ALF4  LALT(KC_F4)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { 
 
@@ -73,11 +81,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB  ,FI_DOT  ,FI_ODIA ,FI_ADIA ,KC_P    ,KC_Y    ,ARROW   ,                          DEFINE  ,KC_F    ,KC_G    ,KC_K    ,KC_R    ,KC_B    ,FI_EQL ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_BSPC ,KC_A    ,KC_O    ,KC_E    ,KC_NA_I ,KC_U    ,FI_QUOT ,                          FI_DQUO ,KC_D    ,KC_SY_H ,KC_T    ,KC_N    ,KC_S    ,FI_COMM ,
+     KC_BSPC ,KC_N2_A ,KC_O    ,KC_E    ,KC_NA_I ,KC_U    ,FI_QUOT ,                          FI_DQUO ,KC_D    ,KC_SY_H ,KC_T    ,KC_N    ,KC_N2_S ,FI_COMM ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT ,FI_UNDS ,KC_Q    ,KC_J    ,KC_C    ,KC_X    ,KC_PLPS ,KC_NEXT ,        KC_VOLD ,KC_VOLU ,KC_L    ,KC_M    ,KC_W    ,KC_V    ,KC_Z    ,KC_RSFT ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     KC_LCTL ,FI_QUES ,KC_PPLS ,KC_ALAS ,     NAV2_L   ,    KC_SPC  ,KC_CTPL ,        KC_NADE ,KC_ENT  ,     SYM_L,      DM_PLY1 ,DM_PLY2 ,KC_APP  ,KC_LGUI 
+     KC_LCTL ,FI_QUES ,KC_PPLS ,KC_ALAS ,     SYM_L   ,    KC_SPC  ,KC_CTPL ,        KC_NADE ,KC_ENT  ,     SYM_L,      DM_PLY1 ,DM_PLY2 ,KC_APP  ,KC_LGUI 
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 
@@ -111,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______ ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,_______ ,
+     KC_ALF4 ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,C(KC_S) ,C(KC_Y) ,C(KC_F) ,_______ ,_______ ,_______ ,                          _______ ,KC_PSLS ,KC_HOME ,KC_UP   ,KC_END  ,_______ ,_______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -125,15 +133,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV2] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______ ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,XXXXXXX ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,KC_HOME   ,KC_UP ,KC_END ,_______ ,_______ ,                          _______ ,_______ ,KC_P7 ,KC_P8 ,KC_P9 ,_______ ,_______ ,
+     _______ ,_______ ,_______ ,KC_WH_U ,_______ ,_______ ,_______ ,                          _______ ,_______ ,KC_UP_LEFT ,KC_MS_U ,KC_UP_RIGHT ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,C(KC_S) ,KC_LEFT  ,KC_DOWN ,KC_RIGHT ,KC_DEL ,_______ ,                          _______ ,_______ ,KC_P4 ,KC_P5 ,KC_P6 ,KC_DEL ,_______ ,
+     _______ ,_______ ,KC_WH_L ,KC_WH_D ,KC_WH_R ,_______ ,_______ ,                          _______ ,_______ ,KC_MS_L ,KC_MS_D ,KC_MS_R ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,C(KC_Z) ,C(KC_X) ,C(KC_C) ,C(KC_V) ,_______ ,_______ ,_______ ,        _______ ,_______ ,_______ ,KC_P1 ,KC_P2 ,KC_P3 ,_______ ,_______ ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,        _______ ,_______ ,_______ ,KC_DOWN_LEFT ,_______ ,KC_DOWN_RIGHT ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,     _______ ,    _______ ,_______ ,        _______ ,_______ ,    KC_P0 ,     KC_P0 ,KC_PDOT ,_______ ,_______ 
+     _______ ,_______ ,_______ ,_______ ,     _______ ,    KC_BTN2 ,KC_BTN1 ,        KC_BTN1 ,KC_BTN2 ,    KC_BTN3 ,     _______ ,_______ ,_______ ,_______ 
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 
@@ -298,6 +306,54 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
        }
        break;
     }
+   case KC_UP_RIGHT:
+      if (record->event.pressed) {
+            // when keycode KC_UP_RIGHT is pressed
+            register_code(KC_MS_UP);  // press the key
+            register_code(KC_MS_RIGHT);  // press the key
+      } else {
+            // when keycode KC_UP_RIGHT is released
+            unregister_code(KC_MS_RIGHT);  // release the key
+            unregister_code(KC_MS_UP);  // release the key
+      }
+      break;
+
+   case KC_UP_LEFT:
+      if (record->event.pressed) {
+            // when keycode KC_UP_LEFT is pressed
+            register_code(KC_MS_UP);  // press the key
+            register_code(KC_MS_LEFT);  // press the key
+      } else {
+            // when keycode KC_UP_RIGHT is released
+            unregister_code(KC_MS_LEFT);  // release the key
+            unregister_code(KC_MS_UP);  // release the key
+      }
+      break;
+
+   case KC_DOWN_RIGHT:
+      if (record->event.pressed) {
+            // when keycode KC_UP_RIGHT is pressed
+            register_code(KC_MS_DOWN);  // press the key
+            register_code(KC_MS_RIGHT);  // press the key
+      } else {
+            // when keycode KC_UP_RIGHT is released
+            unregister_code(KC_MS_RIGHT);  // release the key
+            unregister_code(KC_MS_DOWN);  // release the key
+      }
+      break;
+
+   case KC_DOWN_LEFT:
+      if (record->event.pressed) {
+            // when keycode KC_UP_RIGHT is pressed
+            register_code(KC_MS_DOWN);  // press the key
+            register_code(KC_MS_LEFT);  // press the key
+      } else {
+            // when keycode KC_UP_RIGHT is released
+            unregister_code(KC_MS_LEFT);  // release the key
+            unregister_code(KC_MS_DOWN);  // release the key
+      }
+      break;
+
     default:
       return true;
   }
